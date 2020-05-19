@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace Lab_6
 {
+    [Serializable]
     class Bloque:División
-    {
+    {public Bloque(string name) : base(name)
+        { }
     }
 }

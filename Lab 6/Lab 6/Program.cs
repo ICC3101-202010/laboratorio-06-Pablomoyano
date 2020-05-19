@@ -16,6 +16,8 @@ namespace Lab_6
             
         {
             List<Empresa> empresa = new List<Empresa>();
+            List<División> division = new List<División>();
+            List<Persona> personales = new List<Persona>();
             while (true)
             { 
             Console.WriteLine("Desea utilizar un archivo para cargar la informacion?");
@@ -32,8 +34,9 @@ namespace Lab_6
                             }
                             sr.Close();
                         }
-                        catch(FileNotFoundException ex)
+                        catch(FileNotFoundException e)
                         { Console.WriteLine("Archivo no encontrado");
+                            Console.WriteLine(e.Message);
                             addEmpresa(empresa);
                             SaveEmpresa(empresa);
                         }
@@ -66,6 +69,37 @@ namespace Lab_6
             Stream stream = new FileStream("empresa.bin", FileMode.Create, FileAccess.Write, FileShare.None);
             formatter.Serialize(stream, empresa);
             stream.Close();
+        }
+        static private void Deserialisador()
+        {
+            IFormatter formatter = new BinaryFormatter();
+            Stream stream = new FileStream("empresa.bin", FileMode.Open, FileAccess.Read, FileShare.Read);
+            List<Empresa> empresa = (List<Empresa>)formatter.Deserialize(stream);
+            stream.Close();
+        }
+        static private void CreadorPersonal(List<Persona> personal)
+        { Console.WriteLine("Escriba el nombre del trabajador");
+            string newpn = Console.ReadLine();
+            Console.WriteLine("Escriba el apellido");
+            string newpln = Console.ReadLine();
+            Console.WriteLine("Escriba el rut");
+            string newpr = Console.ReadLine();
+            Console.WriteLine("Escriba el cargo");
+            string newpc = Console.ReadLine();
+            personal.Add(new Persona(newpn, newpln, newpr, newpc));
+        }
+        static private void DatosEmpresa(List<División> division)
+        { Console.WriteLine("Escriba la division");
+            string divi = Console.ReadLine();
+            division.Add(new División(divi));
+            Console.WriteLine("Escriba el departamento");
+            string depa = Console.ReadLine();
+            Console.WriteLine("Escriba la seccion");
+            string secc = Console.ReadLine();
+            Console.WriteLine("Escriba el bloque 1");
+            string bl1 = Console.ReadLine();
+            Console.WriteLine("Escriba el bloque 2");
+            string bl2 = Console.ReadLine();
         }
     }
     

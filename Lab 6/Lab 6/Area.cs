@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace Lab_6
 {
     class Area:División
-    {
+    {public Area(string name) : base(name)
+        { this.name = name; }
     }
 }

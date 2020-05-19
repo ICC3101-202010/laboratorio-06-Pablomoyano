@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace Lab_6
 {
+    [Serializable]
     class Departamento:División
-    {
+    {public Departamento(string name):base(name)
+        {
+            this.name = name;
+        }
     }
 }
