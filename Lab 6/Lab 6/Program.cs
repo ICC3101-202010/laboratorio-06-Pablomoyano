@@ -34,11 +34,25 @@ namespace Lab_6
                             }
                             sr.Close();
                         }
-                        catch(FileNotFoundException e)
+                        catch (FileNotFoundException e)
                         { Console.WriteLine("Archivo no encontrado");
                             Console.WriteLine(e.Message);
                             addEmpresa(empresa);
                             SaveEmpresa(empresa);
+                            DatosEmpresa(division);
+
+                            Guardadivisiones(division);
+                            Console.WriteLine("Escriba el encargado de division");
+                            CreadorPersonal(personales);
+                            Console.WriteLine("Escriba los nombres de los trabajadores del bloque 1 ");
+                            CreadorPersonal(personales);
+                            CreadorPersonal(personales);
+                            Console.WriteLine("Escriba los nombres de los trabajadores del bloque 2");
+                            CreadorPersonal(personales);
+                            CreadorPersonal(personales);
+                            Guardapersonas(personales);
+
+
                         }
                         break;
                     case 2:
@@ -94,12 +108,29 @@ namespace Lab_6
             division.Add(new División(divi));
             Console.WriteLine("Escriba el departamento");
             string depa = Console.ReadLine();
+            division.Add(new Departamento(depa));
             Console.WriteLine("Escriba la seccion");
             string secc = Console.ReadLine();
+            division.Add(new Seccion(secc));
             Console.WriteLine("Escriba el bloque 1");
             string bl1 = Console.ReadLine();
+            division.Add(new Bloque(bl1));
             Console.WriteLine("Escriba el bloque 2");
             string bl2 = Console.ReadLine();
+            division.Add(new Bloque(bl2));
+        }
+        static private void Guardapersonas(List<Persona> personal)
+        { IFormatter formatter = new BinaryFormatter();
+            Stream stream = new FileStream("empresa.bin", FileMode.Open, FileAccess.Read, FileShare.Read);
+            formatter.Serialize(stream, personal);
+            stream.Close();
+        }
+        static private void Guardadivisiones(List<División> division)
+        {
+            IFormatter formatter = new BinaryFormatter();
+            Stream stream = new FileStream("empresa.bin", FileMode.Open, FileAccess.Read, FileShare.Read);
+            formatter.Serialize(stream, division);
+            stream.Close();
         }
     }
     
